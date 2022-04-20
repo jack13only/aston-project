@@ -1,8 +1,8 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import './App.scss';
-import { CardId, Header } from './components';
-import { Search, NotFound, Main } from './pages';
+import { Header } from './components';
+import { Search, NotFound, Main, CardId } from './pages';
 import { PATHS } from './shared/constants/routes';
 
 const App = () => {
