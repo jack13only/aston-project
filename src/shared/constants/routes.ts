@@ -2,10 +2,12 @@ interface IPATH {
   main: string;
   id: string;
   notFound: string;
+  search: string;
 }
 
 export const PATHS: IPATH = {
   main: '/',
-  id: '/:id',
+  search: '/search',
+  id: '/search/:id',
   notFound: '*',
 };

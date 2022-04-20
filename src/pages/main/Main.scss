@@ -1,15 +1,15 @@
 .main {
-  padding: 3vh 19.5vw;
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
 
-  .main__loading,
-  .main__error {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-top: 50px;
-  }
-
-  @media (max-width: 1000px) {
-    padding: 3vh 5vw;
+  .main__description {
+    margin: 0 auto;
+    width: 40vw;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: inset 0px 0px 15px rgb(6, 218, 172);
+    font-size: 20px;
   }
 }

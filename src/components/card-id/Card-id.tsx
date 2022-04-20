@@ -45,9 +45,13 @@ const CardId = (): JSX.Element => {
               <span>{data.created}</span>
             </div>
           </div>
+          <div className="card_modal__button-back-wrap">
+            <button className="card_modal__button-back" onClick={() => navigate(-1)}>
+              Go back
+            </button>
+          </div>
         </div>
       )}
-      <button onClick={() => navigate(-1)}>go home</button>
     </>
   );
 };

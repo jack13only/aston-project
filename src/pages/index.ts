@@ -1,4 +1,5 @@
-import Main from './main/Main';
+import Search from './search/Search';
 import NotFound from './not-found/Not-found';
+import Main from './main/Main';
 
-export { Main, NotFound };
+export { Search, NotFound, Main };

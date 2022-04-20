@@ -1,0 +1,16 @@
+.search {
+  padding: 3vh 19.5vw;
+  position: relative;
+
+  .search__loading,
+  .search__error {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 50px;
+  }
+
+  @media (max-width: 1000px) {
+    padding: 3vh 5vw;
+  }
+}

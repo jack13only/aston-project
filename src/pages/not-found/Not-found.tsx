@@ -4,8 +4,8 @@ import { PATHS } from '../../shared/constants/routes';
 import './Not-found.scss';
 
 const NotFound = (): JSX.Element => {
-  const [count, setCount] = useState(5 as number);
-  const [, setIntervalId] = useState(0 as NodeJS.Timer | number);
+  const [count, setCount] = useState<number>(3);
+  const [, setIntervalId] = useState<NodeJS.Timer | number>(0);
 
   useEffect(() => {
     const newIntervalId = setInterval(() => {
@@ -19,8 +19,8 @@ const NotFound = (): JSX.Element => {
   if (count === 0) return <Navigate to={PATHS.main} />;
   return (
     <div className="error-wrapper">
-      <div>
-        <img src="../images/gif/404.gif" alt="" className="error-wrapper__pic" />
+      <div className="error-wrapper__pic-wrapper">
+        {/* <img src="../images/gif/404.gif" alt="" className="error-wrapper__pic" /> */}
       </div>
       <div className="error-wrapper__404">404</div>
       <div className="error-wrapper__not-found">Not found</div>

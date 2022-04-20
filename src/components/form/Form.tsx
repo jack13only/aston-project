@@ -3,100 +3,38 @@ import { useForm } from 'react-hook-form';
 import { createSearchParams, useSearchParams } from 'react-router-dom';
 import classNames from 'classnames';
 import { useAppDispatch } from '../../app/hooks';
-import { changeName, changeStatus, changeGender, changeSpecies } from '../../features/control-api';
-import { STATUS, GENDER, SPECIES } from '../../shared/constants/form';
-import './Form.scss';
+import { changeAllFilters, pageFirst } from '../../features/control-api';
+import { formHelpers, FormValues } from '../../shared/constants/form';
 import { removeEmptyFields } from '../../features/removeEmptyFields';
-
-type FormValues = {
-  name: string;
-  status: string;
-  gender: string;
-  species: string;
-};
-
-// interface dataForFilter {
-//   name: string;
-//   status: string;
-//   gender: string;
-//   species: string;
-// }
-
-// const paramsNames: ('name' | 'status' | 'gender' | 'species')[] = [
-//   'name',
-//   'status',
-//   'gender',
-//   'species',
-// ];
-
-// changeName, changeStatus, changeGender, changeSpecies
+import './Form.scss';
 
 const Form = (): JSX.Element => {
   const dispatch = useAppDispatch();
-  const { register, handleSubmit, reset } = useForm<FormValues>();
-  const [hideFilters, setHideFilters] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
+  const { register, handleSubmit, reset } = useForm<FormValues>({
+    defaultValues: { name: searchParams.get('name') ?? '' },
+  });
+  const [hideFilters, setHideFilters] = useState(false);
 
-  useEffect(() => {
-    dispatch(changeName(searchParams.get('name') || ''));
-    if (!hideFilters) {
-      dispatch(changeStatus(searchParams.get('status') || ''));
-      dispatch(changeGender(searchParams.get('gender') || ''));
-      dispatch(changeSpecies(searchParams.get('species') || ''));
-    }
-  }, [dispatch, hideFilters, searchParams]);
+  const { STATUS, GENDER, SPECIES, defaultFiltersValues, createNewParams } = formHelpers;
 
-  // createSearchParams()
-  // const query = useQuery();
-  // const [searchParams, setSearchParams] = useSearchParams();
-
-  // const a = () => {
-  //   let dataForFilters = {};
-  //   paramsNames.forEach((item: string) => {
-  //     console.log(item);
-  //     if (searchParams.has(item)) {
-  //       console.log(1);
-  //       dataForFilters = { ...dataForFilters, ...{ [item]: searchParams.get(item) } };
-  //     }
-  //   });
-  //   console.log(dataForFilters);
-  //   return dataForFilters;
-  // };
-
-  // const [query, setQuery] = useState(a());
-
-  // useEffect(() => {
-  //   let params = serializeFormQuery(event.target);
-  //   setSearchParams({ getValues(paramsNames) });
-  //   dispatch(changeFilters({ query }));
-  // }, [query]);
-
-  const onSubmit = (data: FormValues) => {
-    const newSearchParams = createSearchParams(removeEmptyFields(data));
-    // if (data.name === undefined) return;
-    // setSearchParams(data);
-    // const q = searchParams.get('name') as string;
-    // console.log(query);
-    // setSearchParams({ name: query });
-    // console.log(searchParams);
-    // const dataForFilter: FormValues = hideFilters
-    //   ? { name: data.name }
-    //   : Object.fromEntries(Object.entries(data).filter((item) => item[1]));
-    // dispatch(changeFilters(dataForFilter));
-
-    // let dataForFilters: FormValues = {};
-    // paramsNames.forEach((item: string) => {
-    //   if (query.has(item)) dataForFilters = { ...dataForFilters, ...{ [item]: query.get(item) } };
-    // });
-    // console.log(dataForFilters);
-    // dispatch(changeFilters({ name: query }));
-    // dispatch(changeFilters(query));
-    setSearchParams(newSearchParams);
+  const createSetParams = (obj: FormValues) => {
+    const newParams = createSearchParams(removeEmptyFields(obj));
+    setSearchParams(newParams);
   };
 
-  // const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-  //   console.log(e);
-  // };
+  useEffect(() => {
+    const newObj = createNewParams(searchParams, hideFilters);
+
+    createSetParams(newObj);
+    dispatch(changeAllFilters(newObj));
+  }, [hideFilters, searchParams]);
+
+  const onSubmit = (data: FormValues) => {
+    dispatch(pageFirst());
+    const newObj = { ...defaultFiltersValues, ...data };
+    createSetParams(newObj);
+  };
 
   const filtersClass = classNames('form__bottom', {
     hideFilters: hideFilters,
@@ -116,11 +54,22 @@ const Form = (): JSX.Element => {
           className="form__reset"
           onClick={() => {
             reset();
+            handleSubmit(onSubmit)();
           }}
         />
-        <button onClick={() => setHideFilters(!hideFilters)} className="form__hide-filters">
-          {hideFilters ? 'Show' : 'Hide'} filters
-        </button>
+        <input
+          type="button"
+          onClick={() => {
+            setHideFilters(!hideFilters);
+            reset({
+              gender: GENDER[0],
+              status: STATUS[0],
+              species: SPECIES[0],
+            });
+          }}
+          className="form__hide-filters"
+          value={hideFilters ? 'Show filters' : 'Hide filters'}
+        />
       </div>
       <div className={filtersClass}>
         <label className="form__label-status">

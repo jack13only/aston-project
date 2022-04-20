@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { useAppDispatch } from '../../app/hooks';
+import { useNavigate } from 'react-router-dom';
 import KEY_CODES from '../../shared/constants/key-codes';
+import { PATHS } from '../../shared/constants/routes';
 import './Input.scss';
 
 const Input = () => {
-  const dispatch = useAppDispatch();
   const [inputValue, setInputValue] = useState('');
+  const navigate = useNavigate();
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);
@@ -15,9 +16,7 @@ const Input = () => {
     if (e.keyCode === KEY_CODES.enter) sendRequest(inputValue);
   };
 
-  const sendRequest = (value: string) => {
-    // dispatch(changeName(value));
-  };
+  const sendRequest = (value: string) => navigate(`${PATHS.search}/?name=${value}`);
 
   return (
     <div className="input-wrapper">
