@@ -4,7 +4,7 @@ import KEY_CODES from '../../shared/constants/key-codes';
 import { PATHS } from '../../shared/constants/routes';
 import './Input.scss';
 
-const Input = () => {
+const Input = (): JSX.Element => {
   const [inputValue, setInputValue] = useState('');
   const navigate = useNavigate();
 
@@ -12,7 +12,7 @@ const Input = () => {
     setInputValue(event.target.value);
   };
 
-  const onKeyDown = async (e: { keyCode: number }) => {
+  const onKeyDown = (e: { keyCode: number }) => {
     if (e.keyCode === KEY_CODES.enter) sendRequest(inputValue);
   };
 

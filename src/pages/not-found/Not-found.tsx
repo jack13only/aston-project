@@ -19,9 +19,7 @@ const NotFound = (): JSX.Element => {
   if (count === 0) return <Navigate to={PATHS.main} />;
   return (
     <div className="error-wrapper">
-      <div className="error-wrapper__pic-wrapper">
-        {/* <img src="../images/gif/404.gif" alt="" className="error-wrapper__pic" /> */}
-      </div>
+      <div className="error-wrapper__pic-wrapper"></div>
       <div className="error-wrapper__404">404</div>
       <div className="error-wrapper__not-found">Not found</div>
       <div className="error-wrapper__redirect">

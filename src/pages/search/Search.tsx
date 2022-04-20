@@ -5,7 +5,7 @@ import { removeEmptyFields } from '../../features/removeEmptyFields';
 import { useGetCardsQuery } from '../../repositories/rim-api';
 import './Search.scss';
 
-const Search = () => {
+const Search = (): JSX.Element => {
   const stateFilters = useAppSelector((state) => state.controlApi);
 
   const { data, isError, isLoading } = useGetCardsQuery(removeEmptyFields(stateFilters));

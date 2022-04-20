@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { PATHS } from '../../shared/constants/routes';
 import './Header.scss';
 
-const Header = () => {
+const Header = (): JSX.Element => {
   return (
     <div className="header">
       <Link to={PATHS.main} className="header__link">

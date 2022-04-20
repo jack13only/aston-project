@@ -6,18 +6,6 @@ const filtersApiSlice = createSlice({
   name: 'filtersApi',
   initialState,
   reducers: {
-    changeName(state, action) {
-      state.name = action.payload;
-    },
-    changeStatus(state, action) {
-      state.status = action.payload;
-    },
-    changeGender(state, action) {
-      state.gender = action.payload;
-    },
-    changeSpecies(state, action) {
-      state.species = action.payload;
-    },
     changeAllFilters(state, action) {
       return action.payload;
     },
