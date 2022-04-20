@@ -1,0 +1,39 @@
+.error-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .error-wrapper__pic {
+    max-width: 25vw;
+    max-height: 25vw;
+
+    @media (max-width: 1000px) {
+      max-width: 50vw;
+      max-height: 50vw;
+    }
+
+    @media (max-width: 700px) {
+      max-width: 60vw;
+      max-height: 60vw;
+    }
+  }
+
+  .error-wrapper__404 {
+    font-size: 64px;
+    font-weight: 700;
+  }
+  
+  .error-wrapper__not-found {
+    font-size: 40px;
+  }
+  
+  .error-wrapper__redirect {
+    margin-top: 10px;
+    font-size: 16px;
+
+    .error-wrapper__seconds {
+      font-weight: 700;
+    }
+  }
+}

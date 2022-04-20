@@ -1,0 +1,35 @@
+.card_modal {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 1fr 5fr;
+  gap: 10px 30px;
+  margin: 30px 150px;
+
+  .card_modal__header {
+    grid-area: 1 / 1 / 2 / 3;
+    font-size: 32px;
+    text-align: center;
+  }
+
+  .card_modal__pic-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .card_modal__description {
+    font-size: 22px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;    
+  }
+}
+
+.main__loading,
+.main__error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 50px;
+}
