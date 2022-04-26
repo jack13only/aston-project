@@ -1,0 +1,102 @@
+$green-color: rgb(240, 255, 250);
+
+.form {
+  position: relative;
+
+  .form__top {
+    position: relative;
+    display: grid;
+    grid-template-columns: 5fr 1fr 1fr 1fr;
+    column-gap: 10px;
+    z-index: 10;
+    background-color: rgb(0, 0, 0);
+    padding: 20px;
+    border: 1px $green-color solid;
+    border-bottom-style: none;
+
+    .form__submit,
+    .form__reset,
+    .form__hide-filters {
+      background-color: rgb(0, 0, 0);
+      color: $green-color;
+      border: 1px $green-color solid;
+      transition: 0.3s linear;
+
+      &:hover {
+        cursor: pointer;
+        background-color: rgb(50, 50, 50);
+        font-weight: 700;
+      }
+    }
+  }
+
+  .form__bottom {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 20px;
+    transition: 0.9s linear;
+    z-index: -1;
+    padding: 10px 20px 20px;
+    background-color: rgb(0, 0, 0);
+    border: 1px $green-color solid;
+    margin-top: -1px;
+  }
+
+  @media (max-width: 700px) {
+    .form__bottom,
+    .form__top {
+      padding: 10px;
+    }
+  }
+
+  .hideFilters {
+    z-index: -1;
+    width: 100%;
+    margin-top: -59px;
+  }
+
+  .form__label-name,
+  .form__label-status,
+  .form__label-gender,
+  .form__label-species {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    
+    .form__input-name,
+    .form__select-status,
+    .form__select-gender,
+    .form__select-species {
+      flex-grow: 1;
+      height: 30px;
+      background-color: rgb(0, 0, 0);   
+      border: 1px $green-color solid;
+      color: white;
+      padding: 0 5px;
+      font-size: 15px;
+      &:hover {
+        background-color: rgb(50, 50, 50);
+        font-weight: 700;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .form__input-name,
+      .form__select-status,
+      .form__select-gender,
+      .form__select-species {
+        width: 50px;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .form__label-title {
+        font-size: 14px;
+      }
+
+      & {
+        gap: 3px;
+      }
+    }
+  }
+}

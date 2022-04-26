@@ -1,0 +1,35 @@
+.page-left,
+.page-right {
+  position: fixed;
+  font-family: "RimFont";
+  font-size: 2rem;
+  color: rgb(0, 255, 221);
+  text-shadow: 2px 2px 4px rgb(43, 255, 0);
+  transition: 0.1s linear;
+
+  .page-title {
+    font-size: 1.5rem;
+  }
+
+  &:hover {
+    color: rgb(0, 165, 143);
+    text-shadow: 2px 2px 5px rgb(19, 114, 0);
+    cursor: pointer;
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    color: rgb(0, 155, 134);
+    text-shadow: 2px 2px 5px rgb(35, 209, 0);
+  }
+}
+
+.page-left {
+  top: 50vh;
+  left: 50px;
+}
+
+.page-right {
+  top: 50vh;
+  right: 50px;
+}

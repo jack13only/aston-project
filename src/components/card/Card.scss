@@ -1,0 +1,36 @@
+$green-color: rgb(240, 255, 250);
+
+.cardLink {
+  text-decoration: none;
+  color: $green-color;
+
+  .card {
+    color: $green-color;
+    padding: 20px;
+    border: 1px $green-color solid;
+    border-radius: 2px;
+    transition: 0.5s linear;
+    height: 100%;
+    background-color: rgb(0, 0, 0);
+    
+    &:hover {
+      background-color: rgba(138, 255, 210, 0.103);
+    }
+    
+    .card__header {
+      font-size: 22px;
+    }
+  
+    .card__pic-wrap {
+      margin-top: 10px;
+    }
+  
+    .card__pic {
+      max-width: 100%;
+    }
+  
+    .card__divider {
+      margin: 10px 0;
+    }
+  }
+}

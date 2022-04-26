@@ -1,10 +1,15 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { PATHS } from '../../shared/constants/routes';
 import './Header.scss';
 
-const Header = () => {
+const Header = (): JSX.Element => {
   return (
     <div className="header">
-      <h1>Rick and Morty</h1>
+      <Link to={PATHS.main} className="header__link">
+        <h1 className="header__title">Rick and Morty</h1>
+      </Link>
+      {/* <h1 className="header__title">Rick and Morty</h1> */}
     </div>
   );
 };
