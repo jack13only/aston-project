@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import './Pagination.scss';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { changeAllFilters, pageDown, pageUp } from '../../features/control-api';
+import { changeAllFilters, pageDown, pageUp } from '../../reducers/control-api';
 import { createSearchParams, useSearchParams } from 'react-router-dom';
 import { formHelpers, FormValues } from '../../shared/constants/form';
 import { removeEmptyFields } from '../../features/removeEmptyFields';
@@ -14,7 +14,7 @@ type Pagination = {
 const Pagination = ({ pageLeft, pageRight }: Pagination): JSX.Element => {
   const dispatch = useAppDispatch();
   const [searchParams, setSearchParams] = useSearchParams();
-  const { createNewParams } = formHelpers;
+  const { createParams } = formHelpers;
   const page = useAppSelector((state) => state.controlApi.page);
 
   const createSetParams = (obj: FormValues) => {
@@ -23,11 +23,11 @@ const Pagination = ({ pageLeft, pageRight }: Pagination): JSX.Element => {
   };
 
   useEffect(() => {
-    const newObj = createNewParams(searchParams, false);
+    const newObj = createParams(searchParams, false);
     newObj.page = `${page}`;
     createSetParams(newObj);
     dispatch(changeAllFilters(newObj));
-  }, [searchParams, page]);
+  }, [page]);
 
   return (
     <>

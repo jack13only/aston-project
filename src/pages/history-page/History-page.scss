@@ -1,0 +1,36 @@
+.history {
+  padding: 5vh 20vw;
+  margin: 0 auto;
+  position: relative;
+  font-size: 24px;
+
+  .remove_all {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: rgb(230, 57, 57);
+    font-family: 'RimFont';
+    font-size: 22px;
+    transition: 0.2s linear;
+
+    &:hover {
+      cursor: pointer;
+      top: 19px;
+      color: rgb(255, 0, 0);
+    }
+  }
+
+  .history-title {
+    text-align: center;
+    font-size: 52px;
+    margin-bottom: 30px;    
+  }
+
+  @media (max-width: 900px) {
+    padding: 5vh 10vw;
+  }
+
+  @media (max-width: 900px) {
+    font-size: 22px;
+  }
+}

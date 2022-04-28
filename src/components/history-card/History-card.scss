@@ -1,0 +1,11 @@
+.history-card {
+  display: grid;
+  grid-template-columns: 1fr repeat(4, 2fr);
+  width: 100%;
+  padding: 3px 0;
+  border-bottom: 1px dotted rgb(218, 255, 247);
+
+  .history-card__field-title {
+    color: rgb(0, 255, 200);
+  }
+}

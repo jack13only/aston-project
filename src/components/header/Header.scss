@@ -7,10 +7,16 @@ $green-color: rgb(240, 255, 250);
   background-repeat: no-repeat;
   background-size: cover;
   display: flex;
+  position: relative;
   justify-content: space-between;
   align-items: center;
   padding: 30px 20vw;
+  font-size: 32px;
   font-family: "RimFont";
+
+  @media (max-width: 650px) {
+    padding: 30px 3vw;
+  }
 
   .header__link {
     text-decoration: none;
@@ -26,6 +32,107 @@ $green-color: rgb(240, 255, 250);
       &:hover {
         transform: translateY(-1px);
         text-shadow: 0px 0px 5px rgb(54, 165, 32);
+      }
+
+      @media (max-width: 650px) {
+        font-size: 24px;
+      }
+    }    
+  }
+
+  .sign-header {
+    position: absolute;
+    top: 60px;
+    right: 50px;
+    display: flex;
+    gap: 1vw;
+
+    .sign-link-wrapper {
+      border: none;
+      background-color: transparent;
+      text-decoration: none;
+
+      .signin-link,
+      .signup-link {
+        transition: 0.2s linear;
+
+        &:hover {
+          cursor: pointer;
+          position: relative;
+          transform: translateY(-2px);
+          font-size: 35px;
+        }
+      }
+
+      .signin-link {
+        color: rgb(1, 255, 255);
+      }
+
+      .signup-link {
+        color: rgb(0, 255, 170);
+      }
+    }
+  }
+
+  .user-header {
+    position: absolute;
+    top: 50px;
+    right: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 100px;
+    cursor: pointer;
+
+    .user-preferences {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 30px;
+      font-size: 26px;
+    }
+    
+    .user-name {
+      text-decoration: none;
+      color: rgb(0, 255, 221);
+      text-shadow: 2px 2px 2px rgb(54, 165, 32);
+      font-size: 42px;
+    }
+
+    .user-sign-out {
+      color: rgb(255, 72, 72);
+    }
+
+    .user-favourites, 
+    .user-history,
+    .user-sign-out {
+      text-decoration: none;
+      transition: 0.2s linear;
+      &:hover {
+        cursor: pointer;
+        position: relative;
+        transform: translateY(-1px);
+      }
+    }
+
+    @media (max-width: 1100px) {
+      right: 20px;
+      gap: 30px;
+
+      .user-preferences {
+        gap: 10px;
+      }
+    }
+
+    @media (max-width: 1100px) {
+      top: 15px;
+      flex-direction: column;
+    }
+
+    @media (max-width: 600px) {
+      top: 30px;
+      .user-name {
+        font-size: 26px;
       }
     }
   }

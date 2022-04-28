@@ -1,4 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import classNames from 'classnames';
+import { saveUserData } from '../../features/ls-load-save';
+import { addFavourite, removeFavourite } from '../../reducers/auth';
 import './Card.scss';
 
 type IProps = {
@@ -7,17 +11,40 @@ type IProps = {
   name: string;
 };
 
-const Card = (props: IProps): JSX.Element => {
+const Card = ({ id, image, name }: IProps): JSX.Element => {
+  const dispatch = useAppDispatch();
+  const { isAuthenticated, user } = useAppSelector((state) => state.authStorage);
+
+  const manageFavourites = (favouriteState: boolean, id: number) =>
+    dispatch(favouriteState ? removeFavourite(id) : addFavourite(id));
+
+  const likeClass = classNames('card__like', {
+    like: user.favourites.includes(id),
+    unlike: !user.favourites.includes(id),
+  });
+
+  useEffect(() => {
+    saveUserData(user);
+  }, [user]);
+
   return (
-    <>
-      <div className="card">
-        <h3 className="card__header">{props.name}</h3>
-        <hr className="card__divider" />
-        <div className="card__pic-wrap">
-          <img className="card__pic" src={props.image} alt={props.name} />
-        </div>
+    <div className="card">
+      <h3 className="card__header">{name}</h3>
+      <hr className="card__divider" />
+      <div className="card__pic-wrap">
+        <img className="card__pic" src={image} alt={name} />
       </div>
-    </>
+      {isAuthenticated && (
+        <div
+          role="button"
+          className={likeClass}
+          onClick={(e) => {
+            manageFavourites(user.favourites.includes(id), id);
+            e.preventDefault();
+          }}
+        ></div>
+      )}
+    </div>
   );
 };
 

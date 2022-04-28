@@ -1,0 +1,22 @@
+.favourites {
+  padding: 3vh 19.5vw;
+  position: relative;
+
+  .favourites__title {
+    text-align: center;
+    font-size: 52px;
+    margin-bottom: 30px;
+  }
+
+  .favourites__loading,
+  .favourites__error {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 50px;
+  }
+
+  @media (max-width: 1000px) {
+    padding: 3vh 5vw;
+  }
+}

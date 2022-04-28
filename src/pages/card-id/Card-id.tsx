@@ -1,13 +1,28 @@
 import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import classNames from 'classnames';
 import { useGetCardByIdQuery } from '../../repositories/rim-api';
+import { addFavourite, removeFavourite } from '../../reducers/auth';
 import './Card-id.scss';
 
 const CardId = (): JSX.Element => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const { isAuthenticated, user } = useAppSelector((state) => state.authStorage);
+
+  const checkedId = +(id ?? 0);
 
   const { data, isError, isLoading } = useGetCardByIdQuery(id);
+
+  const manageFavourites = (favouriteState: boolean, id: number) =>
+    dispatch(favouriteState ? removeFavourite(id) : addFavourite(id));
+
+  const likeClass = classNames('card__like', {
+    like: user.favourites.includes(checkedId),
+    unlike: !user.favourites.includes(checkedId),
+  });
 
   return (
     <>
@@ -21,6 +36,16 @@ const CardId = (): JSX.Element => {
 
           <div className="card_modal__pic-wrap">
             <img className="card_modal__pic" src={data.image} alt={data.name} />
+            {isAuthenticated && (
+              <div
+                role="button"
+                className={likeClass}
+                onClick={(e) => {
+                  manageFavourites(user.favourites.includes(checkedId), checkedId);
+                  e.preventDefault();
+                }}
+              ></div>
+            )}
           </div>
 
           <div className="card_modal__description">
