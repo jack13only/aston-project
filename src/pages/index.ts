@@ -6,5 +6,6 @@ import Signup from './signup/Signup';
 import Signin from './signin/Signin';
 import Favourites from './favourites/Favourites';
 import HistoryPage from './history-page/History-page';
+import ErrorBoundary from './error-boundary/ErrorBoundary';
 
-export { Search, NotFound, Main, CardId, Signup, Signin, Favourites, HistoryPage };
+export { Search, NotFound, Main, CardId, Signup, Signin, Favourites, HistoryPage, ErrorBoundary };
