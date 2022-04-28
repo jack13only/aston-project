@@ -26,6 +26,19 @@
     margin-bottom: 30px;    
   }
 
+  .history-card-title {
+    display: grid;
+    grid-template-columns: 1fr repeat(4, 2fr);
+    width: 100%;
+    padding: 3px 0;
+    border-bottom: 1px dotted rgb(218, 255, 247);
+
+    .history-card__field-title {
+      text-decoration: none;
+      color: rgb(0, 255, 200);
+    }
+  }
+
   @media (max-width: 900px) {
     padding: 5vh 10vw;
   }

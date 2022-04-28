@@ -4,7 +4,6 @@ import { removeHistory } from '../../reducers/auth';
 import { HistoryCard } from '../../components';
 import './History-page.scss';
 import { PATHS } from '../../shared/constants/routes';
-import { isTemplateHead } from 'typescript';
 import { Link } from 'react-router-dom';
 
 const HistoryPage = (): JSX.Element => {
@@ -17,7 +16,7 @@ const HistoryPage = (): JSX.Element => {
         Remove ALL
       </div>
 
-      <div className="history-card">
+      <div className="history-card-title">
         <div className="history-card__field-title">Index:</div>
         <div className="history-card__field-title">Name:</div>
         <div className="history-card__field-title">Status:</div>
