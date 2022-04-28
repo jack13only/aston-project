@@ -13,7 +13,12 @@ const Form = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const [searchParams, setSearchParams] = useSearchParams();
   const { register, handleSubmit, reset } = useForm<FormValues>({
-    defaultValues: { name: searchParams.get('name') ?? '' },
+    defaultValues: {
+      name: searchParams.get('name') ?? '',
+      gender: searchParams.get('gender') ?? '',
+      status: searchParams.get('status') ?? '',
+      species: searchParams.get('species') ?? '',
+    },
   });
   const [hideFilters, setHideFilters] = useState(false);
 
@@ -26,7 +31,6 @@ const Form = (): JSX.Element => {
 
   useEffect(() => {
     const newObj = createParams(searchParams, hideFilters);
-
     createSetParams(newObj);
     dispatch(changeAllFilters(newObj));
   }, [hideFilters, searchParams]);

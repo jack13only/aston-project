@@ -3,6 +3,9 @@ import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { removeHistory } from '../../reducers/auth';
 import { HistoryCard } from '../../components';
 import './History-page.scss';
+import { PATHS } from '../../shared/constants/routes';
+import { isTemplateHead } from 'typescript';
+import { Link } from 'react-router-dom';
 
 const HistoryPage = (): JSX.Element => {
   const dispatch = useAppDispatch();
@@ -23,7 +26,13 @@ const HistoryPage = (): JSX.Element => {
       </div>
 
       {user.history.map((item, index) => (
-        <HistoryCard key={index} card={item} index={index + 1} />
+        <Link
+          to={`${PATHS.search}/?name=${item.name}&gender=${item.gender}&status=${item.status}&species=${item.species}`}
+          className="history__link"
+          key={index}
+        >
+          <HistoryCard card={item} index={index + 1} />
+        </Link>
       ))}
     </div>
   );
