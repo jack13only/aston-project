@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from 'react';
 import './Pagination.scss';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
