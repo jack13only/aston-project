@@ -12,7 +12,7 @@ const SPECIES = [
   'unknown',
 ];
 
-const defaultFiltersValues = {
+export const defaultFiltersValues: FormValues = {
   name: '',
   status: '',
   gender: '',
@@ -28,11 +28,11 @@ export type FormValues = {
   page: string;
 };
 
-const createNewParams = (params: URLSearchParams, hide: boolean) => {
+const createParams = (params: URLSearchParams, hiddenParams: boolean): FormValues => {
   const newObj = { ...defaultFiltersValues };
   newObj.name = params.get('name') ?? '';
   newObj.page = params.get('page') ?? '1';
-  if (!hide) {
+  if (!hiddenParams) {
     newObj.status = params.get('status') ?? '';
     newObj.gender = params.get('gender') ?? '';
     newObj.species = params.get('species') ?? '';
@@ -45,5 +45,5 @@ export const formHelpers = {
   GENDER,
   SPECIES,
   defaultFiltersValues,
-  createNewParams,
+  createParams,
 };

@@ -3,7 +3,8 @@ import { useForm } from 'react-hook-form';
 import { createSearchParams, useSearchParams } from 'react-router-dom';
 import classNames from 'classnames';
 import { useAppDispatch } from '../../app/hooks';
-import { changeAllFilters, pageFirst } from '../../features/control-api';
+import { addHistory } from '../../reducers/auth';
+import { changeAllFilters, pageFirst } from '../../reducers/control-api';
 import { formHelpers, FormValues } from '../../shared/constants/form';
 import { removeEmptyFields } from '../../features/removeEmptyFields';
 import './Form.scss';
@@ -12,11 +13,16 @@ const Form = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const [searchParams, setSearchParams] = useSearchParams();
   const { register, handleSubmit, reset } = useForm<FormValues>({
-    defaultValues: { name: searchParams.get('name') ?? '' },
+    defaultValues: {
+      name: searchParams.get('name') ?? '',
+      gender: searchParams.get('gender') ?? '',
+      status: searchParams.get('status') ?? '',
+      species: searchParams.get('species') ?? '',
+    },
   });
   const [hideFilters, setHideFilters] = useState(false);
 
-  const { STATUS, GENDER, SPECIES, defaultFiltersValues, createNewParams } = formHelpers;
+  const { STATUS, GENDER, SPECIES, defaultFiltersValues, createParams } = formHelpers;
 
   const createSetParams = (obj: FormValues) => {
     const newParams = createSearchParams(removeEmptyFields(obj));
@@ -24,8 +30,7 @@ const Form = (): JSX.Element => {
   };
 
   useEffect(() => {
-    const newObj = createNewParams(searchParams, hideFilters);
-
+    const newObj = createParams(searchParams, hideFilters);
     createSetParams(newObj);
     dispatch(changeAllFilters(newObj));
   }, [hideFilters, searchParams]);
@@ -34,6 +39,7 @@ const Form = (): JSX.Element => {
     dispatch(pageFirst());
     const newObj = { ...defaultFiltersValues, ...data };
     createSetParams(newObj);
+    dispatch(addHistory(newObj));
   };
 
   const filtersClass = classNames('form__bottom', {

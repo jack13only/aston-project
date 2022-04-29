@@ -20,3 +20,9 @@ export interface RiMObject {
   type: string;
   url: string;
 }
+
+export const remakeData = (data: Array<RiMObject> | RiMObject): Array<RiMObject> | null => {
+  if (Array.isArray(data)) return data;
+  if (data?.id) return [data];
+  return [];
+};

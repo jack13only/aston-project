@@ -1,15 +1,21 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
-import fetchRimSlice from '../features/control-api';
+import fetchRimSlice from '../reducers/control-api';
 import { rimApi } from '../repositories/rim-api';
-import controlApiSlice from '../features/control-api';
+import controlApiSlice from '../reducers/control-api';
+import localStorageSlice from '../reducers/locastorage-slice';
+import authSlice from '../reducers/auth';
+import { localStorageMiddleware } from '../middleware/ls-middleware';
 
 export const store = configureStore({
   reducer: {
     fetchRim: fetchRimSlice,
     [rimApi.reducerPath]: rimApi.reducer,
     controlApi: controlApiSlice,
+    localStorageUse: localStorageSlice,
+    authStorage: authSlice,
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(rimApi.middleware),
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(rimApi.middleware, localStorageMiddleware),
 });
 
 export type AppDispatch = typeof store.dispatch;

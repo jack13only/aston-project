@@ -1,5 +1,5 @@
 .main {
-  padding: 50px;
+  padding: 50px 0;
   display: flex;
   flex-direction: column;
   gap: 40px;
@@ -7,9 +7,17 @@
   .main__description {
     margin: 0 auto;
     width: 40vw;
-    padding: 15px;
+    padding: 25px;
     border-radius: 10px;
     box-shadow: inset 0px 0px 15px rgb(6, 218, 172);
-    font-size: 20px;
+    font-size: 30px;
+  }
+
+  @media (max-width: 900px) {
+    
+
+    .main__description {
+      width: 90vw;
+    }
   }
 }

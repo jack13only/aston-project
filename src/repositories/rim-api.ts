@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { rimUrl } from '../shared/constants/api-urls';
+import { remakeData, RiMObject, rimUrl } from '../shared/constants/api';
 
 export const rimApi = createApi({
   reducerPath: 'rimApi',
@@ -20,7 +20,16 @@ export const rimApi = createApi({
         };
       },
     }),
+    getMultipleCardsByIds: build.query({
+      query: (idsArray) => {
+        const ids = idsArray.join(',');
+        return {
+          url: `/character/${ids}`,
+        };
+      },
+      transformResponse: (response: Array<RiMObject> | RiMObject) => remakeData(response),
+    }),
   }),
 });
 
-export const { useGetCardsQuery, useGetCardByIdQuery } = rimApi;
+export const { useGetCardsQuery, useGetCardByIdQuery, useGetMultipleCardsByIdsQuery } = rimApi;
