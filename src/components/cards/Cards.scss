@@ -11,11 +11,23 @@
     grid-template-columns: repeat(3, 1fr);
   }
 
-  @media (max-width: 1400px) {
+  @media (max-width: 1400px) {    
     grid-template-columns: repeat(2, 1fr);
   }
 
-  @media (max-width: 550px) {
+  @media (max-width: 1000px) {    
+    padding: 30px 10vw;
+  }
+
+  @media (max-width: 850px) {
     grid-template-columns: repeat(1, 1fr);
+  }
+
+  @media (max-width: 650px) {
+    padding: 30px 20vw;
+  }
+
+  @media (max-width: 550px) {
+    padding: 30px 10vw;
   }
 }

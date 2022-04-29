@@ -37,6 +37,7 @@ const Form = (): JSX.Element => {
   }, [hideFilters, searchParams]);
 
   const onSubmit = (data: FormValues) => {
+    console.log(data);
     dispatch(pageFirst());
     const newObj = { ...defaultFiltersValues, ...data };
     createSetParams(newObj);
@@ -60,7 +61,7 @@ const Form = (): JSX.Element => {
           value="Reset"
           className="form__reset"
           onClick={() => {
-            reset();
+            reset({ name: '', status: '', gender: '', species: '' });
             handleSubmit(onSubmit)();
           }}
         />
