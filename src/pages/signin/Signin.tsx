@@ -66,7 +66,7 @@ const Signin = (): JSX.Element => {
           {...register('password', {
             required: 'Empty password',
             validate: {
-              checkName: (v) => !errors.name || 'User does not exist',
+              checkName: () => !errors.name || 'User does not exist',
               checkPass: (v) => checkPass(name.current.toString(), v) || 'Wrong password',
             },
           })}
