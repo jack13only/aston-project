@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { ContextFavouritePage } from '../../context/context';
 import { logout } from '../../reducers/auth';
 import { PATHS } from '../../shared/constants/routes';
 import './Header.scss';
@@ -9,6 +10,7 @@ const Header = (): JSX.Element => {
   const { isAuthenticated, user } = useAppSelector((state) => state.authStorage);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const value = useContext(ContextFavouritePage);
 
   return (
     <div className="header">
@@ -26,7 +28,7 @@ const Header = (): JSX.Element => {
           </Link>
           <div className="user-preferences">
             <Link to={PATHS.favourites} className="user-favourites">
-              Favourites ({user.favourites.length})
+              Favourites ({value})
             </Link>
             <Link to={PATHS.history} className="user-history">
               History

@@ -37,7 +37,6 @@ const Form = (): JSX.Element => {
   }, [hideFilters, searchParams]);
 
   const onSubmit = (data: FormValues) => {
-    console.log(data);
     dispatch(pageFirst());
     const newObj = { ...defaultFiltersValues, ...data };
     createSetParams(newObj);

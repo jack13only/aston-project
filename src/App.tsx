@@ -1,7 +1,9 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import './App.scss';
+import { useAppSelector } from './app/hooks';
 import { Header, RequireAuth } from './components';
+import { ContextFavouritePage } from './context/context';
 import {
   Search,
   NotFound,
@@ -16,9 +18,12 @@ import {
 import { PATHS } from './shared/constants/routes';
 
 const App = () => {
+  const { user } = useAppSelector((state) => state.authStorage);
   return (
     <div className="App">
-      <Header />
+      <ContextFavouritePage.Provider value={user.favourites.length}>
+        <Header />
+      </ContextFavouritePage.Provider>
       <ErrorBoundary>
         <Routes>
           <Route path={PATHS.main} element={<Main />} />
