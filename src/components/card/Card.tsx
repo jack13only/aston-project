@@ -15,12 +15,14 @@ const Card = ({ id, image, name }: IProps): JSX.Element => {
   const dispatch = useAppDispatch();
   const { isAuthenticated, user } = useAppSelector((state) => state.authStorage);
 
+  const isAvailableInFavourite = user.favourites.includes(id);
+
   const manageFavourites = (favouriteState: boolean, id: number) =>
     dispatch(favouriteState ? removeFavourite(id) : addFavourite(id));
 
   const likeClass = classNames('card__like', {
-    like: user.favourites.includes(id),
-    unlike: !user.favourites.includes(id),
+    like: isAvailableInFavourite,
+    unlike: !isAvailableInFavourite,
   });
 
   useEffect(() => {
@@ -39,7 +41,7 @@ const Card = ({ id, image, name }: IProps): JSX.Element => {
           role="button"
           className={likeClass}
           onClick={(e) => {
-            manageFavourites(user.favourites.includes(id), id);
+            manageFavourites(isAvailableInFavourite, id);
             e.preventDefault();
           }}
         ></div>
