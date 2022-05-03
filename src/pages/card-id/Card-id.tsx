@@ -19,9 +19,11 @@ const CardId = (): JSX.Element => {
   const manageFavourites = (favouriteState: boolean, id: number) =>
     dispatch(favouriteState ? removeFavourite(id) : addFavourite(id));
 
+  const isAvailableInFavourite = user.favourites.includes(checkedId);
+
   const likeClass = classNames('card__like', {
-    like: user.favourites.includes(checkedId),
-    unlike: !user.favourites.includes(checkedId),
+    like: isAvailableInFavourite,
+    unlike: !isAvailableInFavourite,
   });
 
   return (
@@ -41,7 +43,7 @@ const CardId = (): JSX.Element => {
                 role="button"
                 className={likeClass}
                 onClick={(e) => {
-                  manageFavourites(user.favourites.includes(checkedId), checkedId);
+                  manageFavourites(isAvailableInFavourite, checkedId);
                   e.preventDefault();
                 }}
               ></div>

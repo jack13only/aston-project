@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../app/hooks';
 import { addHistory } from '../../reducers/auth';
@@ -6,18 +6,15 @@ import KEY_CODES from '../../shared/constants/key-codes';
 import { PATHS } from '../../shared/constants/routes';
 import { defaultFiltersValues } from '../../shared/constants/form';
 import './Input.scss';
+import useInput from '../../customHooks/useInput';
 
 const Input = (): JSX.Element => {
-  const [inputValue, setInputValue] = useState('');
+  const input = useInput('');
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(event.target.value);
-  };
-
   const onKeyDown = (e: { keyCode: number }) => {
-    if (e.keyCode === KEY_CODES.enter) navitgateTo(inputValue);
+    if (e.keyCode === KEY_CODES.enter) navitgateTo(input.value);
   };
 
   const navitgateTo = (value: string) => {
@@ -27,17 +24,11 @@ const Input = (): JSX.Element => {
 
   return (
     <div className="input-wrapper">
-      <input
-        className="input-wrapper__input"
-        type="text"
-        value={inputValue}
-        onChange={onChange}
-        onKeyDown={onKeyDown}
-      />
+      <input className="input-wrapper__input" type="text" {...input} onKeyDown={onKeyDown} />
       <button
         className="input-wrapper__button"
         onClick={() => {
-          navitgateTo(inputValue);
+          navitgateTo(input.value);
         }}
       />
     </div>
